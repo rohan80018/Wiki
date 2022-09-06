@@ -1,0 +1,44 @@
+{% extends 'encyclopedia/layout.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <head>
+        <style>
+            #main {
+                margin-top: 20px;
+                margin-left: 30px;
+            }
+            p {
+                font-size: larger;
+            }
+            #button {
+                background-color: rgb(207, 207, 210);
+                border: 1px solid rgb(197, 197, 195);
+                border-radius: 4px;
+            }
+            #button:hover {
+                background-color: rgb(85, 124, 241);
+                border: 1px solid rgb(67, 112, 250);
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    
+    
+    {% if content %}
+    <form action="{% url 'edit' %}" method="POST">
+        {% csrf_token %}
+        <input value="{{title}}" name="entry_edit" type="hidden">
+        <input value="Edit" name="edit" id="button" type="submit">
+    </form>
+    <div id="main"><p>{{content|safe}}</p></div>
+    {% else %}
+    <div id="main"><p>{{title}} not found</p></div>
+    
+    {% endif %}
+    <div id="main"><a href="{% url 'index' %}">Home</a></div>
+    
+{% endblock %}
