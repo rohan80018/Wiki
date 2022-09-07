@@ -48,9 +48,9 @@ def search(request):
 def edit(request):
     if request.method == "POST":
         title = request.POST["entry_edit"]
-        content = util.get_entry(request.POST["entry_edit"])
+        content = util.get_entry(title)
         return render(request, "encyclopedia/edit.html", {
-            "title": request.POST["entry_edit"],
+            "title": title,
             "content": content
         })
     
@@ -58,6 +58,7 @@ def edit(request):
 
 def save(request, pk):
     if request.method == "POST":
+        print(util.delete_entry(request.POST["title"]))
         title = request.POST["title"]
         content = request.POST["content"]
         util.save_entry(title, content)

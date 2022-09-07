@@ -45,4 +45,69 @@
                 <input class="inp" id="button" type="submit" value="Save">      
             </div>
         </form>
-    </div>
+    </div>'
+    textarea {
+        height: 90vh;
+        width: 80%;
+    }
+
+
+    {% extends "encyclopedia/layout.html" %}
+
+    {% block title %}
+        Encyclopedia
+    {% endblock %}
+    
+    {% block body %}
+    <head>
+        <style>
+            #main {
+                width: 90%;
+                overflow-x: hidden;
+            }
+            #in {  
+                margin-top: 20px;
+                width: auto;
+            }
+            #inp {
+                
+                border: 2px solid rgb(37, 125, 240);
+                border-radius: 4px;
+                
+            }
+            .title {
+                width: 1005px;
+            }
+            
+    
+            .button {
+                margin-top: 60px;
+                background-color: rgb(37, 125, 240) ;   
+            }
+            .button:hover {
+                border: 2px solid rgb(52, 55, 243);
+                background-color: rgb(52, 55, 243);
+        
+            }
+        </style>
+    </head>
+    <h1>New Entry</h1>
+        <div id="main">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div id="in">
+                    <input class="title" id="inp" type="text" placeholder="Enter title..." name="title" />
+                    
+                </div>
+                <div id="in">
+                    <textarea rows="6" cols="100" id="inp"  type="text" placeholder="Your entry here..." name="content"></textarea>
+                </div>
+                
+                <div id="save">
+                    <input style="width:80px;" class="button" id="inp" type="submit" value="Save">      
+                </div>
+                
+            </form>
+        </div>
+    {% endblock %}
+    
