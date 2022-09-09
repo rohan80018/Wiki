@@ -58,10 +58,10 @@ def edit(request):
 
 def save(request, pk):
     if request.method == "POST":
-        print(util.delete_entry(request.POST["title"]))
+        
         title = request.POST["title"]
         content = request.POST["content"]
-        util.save_entry(title, content)
+        util.save_entry(title, bytes(content, 'utf8'))
         return redirect(f"/wiki/{title}")
     
 
