@@ -1,3 +1,3 @@
 #Ruby
 
-this is a progrsm kjdnj jnkj
+This is a programing language

@@ -28,21 +28,31 @@ def new_entry(request):
 def get_entry(request, pk):
     title = pk
     if request.method == "GET":
-        return render(request, "encyclopedia/file.html", {
-            "title": title,
-            "content": markdown2.markdown(util.get_entry(title))
-        })
+        if util.get_entry(title):
+            context={
+                "title" : title,
+                "content" : markdown2.markdown(util.get_entry(title))
+            }
+        else:
+            context ={"title": title}
+        return render(request, "encyclopedia/file.html", context)
 
 
 def search(request):
     value = request.GET.get("q", "")
     entry_list = []
 
-    for i in util.list_entries():
-        if value.lower() in i.lower():
-            entry_list.append(i)
-    
-    return render(request, "encyclopedia/search.html", {"entries": entry_list})
+    if util.get_entry(value.lower()):
+        return render(request, "encyclopedia/file.html",{
+            "title": value,
+            "content": markdown2.markdown(util.get_entry(value.lower()))
+        })
+    else:
+        for i in util.list_entries():
+            if value.lower() in i.lower():
+                entry_list.append(i)
+        
+        return render(request, "encyclopedia/search.html", {"entries": entry_list})
 
 
 def edit(request):
